@@ -1,7 +1,7 @@
 # Slack pull request open notification
 Use github actions to notify slack that a pull request has been opened.
 
-![example](https://raw.githubusercontent.com/jun3453/slack-pr-open-notification/images/example.png)
+![example](https://raw.githubusercontent.com/jun3453/slack-pr-open-notification-action/images/example.png)
 
 ## Usage
 Add the following yaml to your github actions new workflow.
