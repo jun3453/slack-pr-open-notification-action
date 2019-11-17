@@ -1,0 +1,9 @@
+name: "Slack pr open notification"
+author: "jun3453"
+description: "Use github actions to notify slack that a pull request has been opened."
+runs:
+  using: "docker"
+  image: "Dockerfile"
+branding:
+  icon: "git-pull-request"
+  color: "orange"
