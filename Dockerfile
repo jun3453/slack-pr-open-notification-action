@@ -1,4 +1,4 @@
-FROM node:12
+FROM mhart/alpine-node:12
 
 ADD package*.json /
 RUN npm ci --production
