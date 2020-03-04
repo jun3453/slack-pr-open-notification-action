@@ -5,7 +5,7 @@ const url: string = process.env.SLACK_WEBHOOK_URL;
 const prNum: string = process.env.PULL_REQUEST_NUMBER;
 const prTitle: string = process.env.PULL_REQUEST_TITLE;
 const prUrl: string = process.env.PULL_REQUEST_URL;
-const prBody: string = process.env.PULL_REQUEST_BODY;
+const prBody: string = process.env.PULL_REQUEST_BODY || "No decription provided.";
 const authorName: string = process.env.PULL_REQUEST_AUTHOR_NAME;
 const authorIconUrl: string = process.env.PULL_REQUEST_AUTHOR_ICON_URL;
 const compareBranchName: string = process.env.PULL_REQUEST_COMPARE_BRANCH_NAME;
@@ -49,7 +49,7 @@ const message: Object = {
             type: "section",
             text: {
                 type: "plain_text",
-                text: `${prBody}`,
+                text: prBody,
                 emoji: true,
             },
         },
