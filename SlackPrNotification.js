@@ -10,7 +10,7 @@ var authorName = process.env.PULL_REQUEST_AUTHOR_NAME;
 var authorIconUrl = process.env.PULL_REQUEST_AUTHOR_ICON_URL;
 var compareBranchName = process.env.PULL_REQUEST_COMPARE_BRANCH_NAME;
 var baseBranchName = process.env.PULL_REQUEST_BASE_BRANCH_NAME;
-var sendHereMention = process.env.IS_SEND_HERE_MENTION ? "<!here>\n" : "";
+var sendHereMention = process.env.IS_SEND_HERE_MENTION.toLowerCase() === "true" ? "<!here>\n" : "";
 var message = {
     blocks: [
         {

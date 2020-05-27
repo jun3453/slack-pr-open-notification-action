@@ -11,7 +11,7 @@ const authorIconUrl: string = process.env.PULL_REQUEST_AUTHOR_ICON_URL;
 const compareBranchName: string = process.env.PULL_REQUEST_COMPARE_BRANCH_NAME;
 const baseBranchName: string = process.env.PULL_REQUEST_BASE_BRANCH_NAME;
 
-const sendHereMention: string = process.env.IS_SEND_HERE_MENTION ? "<!here>\n" : "";
+const sendHereMention: string = process.env.IS_SEND_HERE_MENTION.toLowerCase() === "true" ? "<!here>\n" : "";
 
 const message: Object = {
     blocks: [
