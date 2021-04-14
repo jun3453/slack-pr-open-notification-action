@@ -21,4 +21,4 @@ jobs:
         PULL_REQUEST_BASE_BRANCH_NAME : ${{ github.event.pull_request.base.ref }}
         IS_SEND_HERE_MENTION : true
         IS_LITE: true
-      uses: jun3453/slack-pr-open-notification-action@v1.0.0
+      uses: jun3453/slack-pr-open-notification-action@master
