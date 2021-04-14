@@ -29,7 +29,7 @@ jobs:
         PULL_REQUEST_COMPARE_BRANCH_NAME : ${{ github.event.pull_request.head.ref }}
         PULL_REQUEST_BASE_BRANCH_NAME : ${{ github.event.pull_request.base.ref }}
         IS_SEND_HERE_MENTION : true
-      uses: jun3453/slack-pr-open-notification-action@v1.0.2
+      uses: jun3453/slack-pr-open-notification-action@v1.0.3
 ```
 
 ### Arguments
