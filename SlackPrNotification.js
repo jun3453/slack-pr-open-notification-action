@@ -11,18 +11,10 @@ var authorIconUrl = process.env.PULL_REQUEST_AUTHOR_ICON_URL;
 var compareBranchName = process.env.PULL_REQUEST_COMPARE_BRANCH_NAME;
 var baseBranchName = process.env.PULL_REQUEST_BASE_BRANCH_NAME;
 var isLite = process.env.IS_LITE.toLowerCase() === "true";
-var text = process.env.TEXT;
 var sendHereMention = process.env.IS_SEND_HERE_MENTION.toLowerCase() === "true" ? "<!here>\n" : "";
 if (isLite) {
     var message = {
         blocks: [
-            {
-                type: "section",
-                text: {
-                    type: "mrkdwn",
-                    text: text
-                }
-            },
             {
                 type: "section",
                 text: {
@@ -37,13 +29,6 @@ if (isLite) {
 else {
     var message = {
         blocks: [
-            {
-                type: "section",
-                text: {
-                    type: "mrkdwn",
-                    text: text
-                }
-            },
             {
                 type: "section",
                 text: {

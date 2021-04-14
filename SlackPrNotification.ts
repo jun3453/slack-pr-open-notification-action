@@ -11,20 +11,12 @@ const authorIconUrl: string = process.env.PULL_REQUEST_AUTHOR_ICON_URL;
 const compareBranchName: string = process.env.PULL_REQUEST_COMPARE_BRANCH_NAME;
 const baseBranchName: string = process.env.PULL_REQUEST_BASE_BRANCH_NAME;
 const isLite: boolean = process.env.IS_LITE.toLowerCase() === "true";
-const text: string = process.env.TEXT;
 
 const sendHereMention: string = process.env.IS_SEND_HERE_MENTION.toLowerCase() === "true" ? "<!here>\n" : "";
 
 if(isLite){
     const message: Object = {
         blocks: [
-            {
-                type: "section",
-                text: {
-                    type: "mrkdwn",
-                    text: text,
-                },
-            },
             {
                 type: "section",
                 text: {
@@ -38,13 +30,6 @@ if(isLite){
 }else{
     const message: Object = {
         blocks: [
-            {
-                type: "section",
-                text: {
-                    type: "mrkdwn",
-                    text: text,
-                },
-            },
             {
                 type: "section",
                 text: {
