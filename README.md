@@ -29,6 +29,8 @@ jobs:
         PULL_REQUEST_COMPARE_BRANCH_NAME : ${{ github.event.pull_request.head.ref }}
         PULL_REQUEST_BASE_BRANCH_NAME : ${{ github.event.pull_request.base.ref }}
         IS_SEND_HERE_MENTION : true
+        IS_LITE : true
+        TEXT : "IS_LITE slack comment heading text"
       uses: jun3453/slack-pr-open-notification-action@v1.0.2
 ```
 
@@ -41,3 +43,9 @@ See the following URL. https://developer.github.com/v3/pulls/
 
 #### IS_SEND_HERE_MENTION
 boolean. Whether to include a mention here when sending a message.
+
+#### IS_LITE(Optional)
+boolean. The comment will be only the headline and title URL.
+
+#### TEXT(Optional)
+Required when IS_LITE is true. Specifies the heading text.
