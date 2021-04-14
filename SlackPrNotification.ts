@@ -10,65 +10,50 @@ const authorName: string = process.env.PULL_REQUEST_AUTHOR_NAME;
 const authorIconUrl: string = process.env.PULL_REQUEST_AUTHOR_ICON_URL;
 const compareBranchName: string = process.env.PULL_REQUEST_COMPARE_BRANCH_NAME;
 const baseBranchName: string = process.env.PULL_REQUEST_BASE_BRANCH_NAME;
-const isLite: boolean = process.env.IS_LITE.toLowerCase() === "true";
 
 const sendHereMention: string = process.env.IS_SEND_HERE_MENTION.toLowerCase() === "true" ? "<!here>\n" : "";
 
-if(isLite){
-    const message: Object = {
-        blocks: [
-            {
-                type: "section",
-                text: {
+const message: Object = {
+    blocks: [
+        {
+            type: "section",
+            text: {
+                type: "mrkdwn",
+                text: sendHereMention + "*<" + prUrl + "|" + prTitle + ">*",
+            },
+            accessory: {
+                type: "image",
+                image_url: authorIconUrl,
+                alt_text: "github icon",
+            },
+            fields: [
+                {
                     type: "mrkdwn",
-                    text: sendHereMention + "*<" + prUrl + "|" + prTitle + ">*",
+                    text: "*Author*\n" + authorName,
                 },
-            },
-        ]
-    };
-    axios.post(url, message);
-}else{
-    const message: Object = {
-        blocks: [
-            {
-                type: "section",
-                text: {
+                {
                     type: "mrkdwn",
-                    text: sendHereMention + "*<" + prUrl + "|" + prTitle + ">*",
+                    text: "*Base branch*\n" + baseBranchName,
                 },
-                accessory: {
-                    type: "image",
-                    image_url: authorIconUrl,
-                    alt_text: "github icon",
+                {
+                    type: "mrkdwn",
+                    text: "*Pull request number*\n#" + prNum,
                 },
-                fields: [
-                    {
-                        type: "mrkdwn",
-                        text: "*Author*\n" + authorName,
-                    },
-                    {
-                        type: "mrkdwn",
-                        text: "*Base branch*\n" + baseBranchName,
-                    },
-                    {
-                        type: "mrkdwn",
-                        text: "*Pull request number*\n#" + prNum,
-                    },
-                    {
-                        type: "mrkdwn",
-                        text: "*Compare branch*\n" + compareBranchName,
-                    },
-                ],
+                {
+                    type: "mrkdwn",
+                    text: "*Compare branch*\n" + compareBranchName,
+                },
+            ],
+        },
+        {
+            type: "section",
+            text: {
+                type: "plain_text",
+                text: prBody,
+                emoji: true,
             },
-            {
-                type: "section",
-                text: {
-                    type: "plain_text",
-                    text: prBody,
-                    emoji: true,
-                },
-            },
-        ]
-    };
-    axios.post(url, message);
-}
+        },
+    ]
+};
+
+axios.post(url, message);
