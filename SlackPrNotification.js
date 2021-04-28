@@ -8,9 +8,14 @@ var prUrl = process.env.PULL_REQUEST_URL;
 var prBody = process.env.PULL_REQUEST_BODY || "No description provided.";
 var authorName = process.env.PULL_REQUEST_AUTHOR_NAME;
 var authorIconUrl = process.env.PULL_REQUEST_AUTHOR_ICON_URL;
+var compareBranchOwner = process.env.PULL_REQUEST_COMPARE_BRANCH_OWNER;
 var compareBranchName = process.env.PULL_REQUEST_COMPARE_BRANCH_NAME;
+var baseBranchOwner = process.env.PULL_REQUEST_BASE_BRANCH_OWNER;
 var baseBranchName = process.env.PULL_REQUEST_BASE_BRANCH_NAME;
 var sendHereMention = process.env.IS_SEND_HERE_MENTION.toLowerCase() === "true" ? "<!here>\n" : "";
+var prFromFork = process.env.IS_PR_FROM_FORK;
+var compareBranchText = prFromFork === "true" ? "*Compare branch*\n" + compareBranchOwner + ":" + compareBranchName : "*Compare branch*\n" + compareBranchName;
+var baseBranchText = prFromFork === "true" ? "*Base branch*\n" + baseBranchOwner + ":" + baseBranchName : "*Base branch*\n" + baseBranchName;
 var message = {
     blocks: [
         {
@@ -31,7 +36,7 @@ var message = {
                 },
                 {
                     type: "mrkdwn",
-                    text: "*Base branch*\n" + baseBranchName
+                    text: baseBranchText
                 },
                 {
                     type: "mrkdwn",
@@ -39,7 +44,7 @@ var message = {
                 },
                 {
                     type: "mrkdwn",
-                    text: "*Compare branch*\n" + compareBranchName
+                    text: compareBranchText
                 },
             ]
         },
