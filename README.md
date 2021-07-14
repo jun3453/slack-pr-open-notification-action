@@ -31,7 +31,7 @@ jobs:
         IS_SEND_HERE_MENTION : true
         MAKE_PRETTY : true
         MAKE_COMPACT : false
-      uses: jun3453/slack-pr-open-notification-action@v1.0.3
+      uses: jun3453/slack-pr-open-notification-action@v1.1.0
 ```
 
 ### Arguments
