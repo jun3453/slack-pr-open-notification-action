@@ -26,7 +26,7 @@ if (makePretty){
                     block_id: "commit_title",
                     text: {
                         type: "mrkdwn",
-                        text: prNum + "*" + prTitle + "* requests merge from *" + baseBranchName + "* to *" + compareBranchName + "." + sendHereMention
+                        text: "PR#" + prNum + " *" + prTitle + "* requests merge from *" + baseBranchName + "* to *" + compareBranchName + "*." + sendHereMention
                     }
                 },
                 {
@@ -85,7 +85,7 @@ else if (makeCompact) {
                 block_id: "commit_title",
                 text: {
                     type: "mrkdwn",
-                    text: "*<" + prUrl + "|" + prTitle + ">* " + prNum + " for *" + baseBranchName + "* to *" + compareBranchName + "." + sendHereMention
+                    text: " *<" + prUrl + "|" + prTitle + ">* #" + prNum + " for *" + baseBranchName + "* to *" + compareBranchName + "*." + sendHereMention
                 }
             },
             {
