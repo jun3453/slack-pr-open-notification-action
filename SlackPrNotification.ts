@@ -26,7 +26,7 @@ if (makePretty) {
                     block_id: "commit_title",
                     text: {
                         type: "mrkdwn",
-                        text: "*<" + prUrl + "|" + prTitle + ">* #" + prNum + " for *" + baseBranchName + "* to *" + compareBranchName + "*." + sendHereMention
+                        text: "*<" + prUrl + "|" + prTitle + ">* #" + prNum + " from *" + baseBranchName + "* to *" + compareBranchName + "*." + sendHereMention
                     }
                 },
                 {
@@ -73,7 +73,7 @@ if (makePretty) {
             block_id: "commit_title",
             text: {
                 type: "mrkdwn",
-                text: "*<" + prUrl + "|" + prTitle + ">* #" + prNum + " for *" + baseBranchName + "* to *" + compareBranchName + "*." + sendHereMention
+                text: "*<" + prUrl + "|" + prTitle + ">* #" + prNum + " from *" + baseBranchName + "* to *" + compareBranchName + "*." + sendHereMention
             }
         },
         {
