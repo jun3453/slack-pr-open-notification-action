@@ -46,6 +46,8 @@ boolean. Whether to include a mention here when sending a message.
 
 #### MAKE_PRETTY
 boolean. Pretty prints the information. Adds a "See Pull Request" button.
+![make_pretty](https://raw.githubusercontent.com/jun3453/slack-pr-open-notification-action/images/make_pretty.png)
 
 #### MAKE_COMPACT
 boolean. Smaller visual footprint.
+![make_compact](https://raw.githubusercontent.com/jun3453/slack-pr-open-notification-action/images/make_compact.png)
