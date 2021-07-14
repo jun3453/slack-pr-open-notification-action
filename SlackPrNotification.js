@@ -7,7 +7,6 @@ var prTitle = process.env.PULL_REQUEST_TITLE;
 var prUrl = process.env.PULL_REQUEST_URL;
 var prBody = process.env.PULL_REQUEST_BODY || "No description provided.";
 var authorName = process.env.PULL_REQUEST_AUTHOR_NAME;
-var authorEmail = process.env.PULL_REQUEST_COMMITTER_EMAIL;
 var authorIconUrl = process.env.PULL_REQUEST_AUTHOR_ICON_URL;
 var compareBranchName = process.env.PULL_REQUEST_COMPARE_BRANCH_NAME;
 var baseBranchName = process.env.PULL_REQUEST_BASE_BRANCH_NAME;
@@ -26,7 +25,7 @@ if (makePretty){
                     block_id: "commit_title",
                     text: {
                         type: "mrkdwn",
-                        text: "PR#" + prNum + " *" + prTitle + "* requests merge from *" + baseBranchName + "* to *" + compareBranchName + "*." + sendHereMention
+                        text: "(#" + prNum + ") *" + prTitle + "* requests merge from *" + baseBranchName + "* to *" + compareBranchName + "*." + sendHereMention
                     }
                 },
                 {
@@ -58,17 +57,6 @@ if (makePretty){
                         url: prUrl,
                         action_id: "actionId-0",
                         style: "primary"
-                    },
-                    {
-                        type: "button",
-                        text: {
-                            type: "plain_text",
-                            text: "Contact" + authorEmail,
-                            emoji: true
-                        },
-                        value: "Author's email",
-                        url: "mailto:" + authorEmail,
-                        action_id: "actionId-1"
                     }
                     ]
                 }
@@ -99,7 +87,7 @@ else if (makeCompact) {
                     },
                     {
                         type: "mrkdwn",
-                        text: "*<" + authorName + "|mailto:" + authorEmail + ">*"
+                        text: "*" + authorName + "*"
                     }
                 ]
             }

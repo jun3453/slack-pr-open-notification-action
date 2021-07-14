@@ -7,7 +7,6 @@ const prTitle: string = process.env.PULL_REQUEST_TITLE;
 const prUrl: string = process.env.PULL_REQUEST_URL;
 const prBody: string = process.env.PULL_REQUEST_BODY || "No description provided.";
 const authorName: string = process.env.PULL_REQUEST_AUTHOR_NAME;
-const authorEmail: string = process.env.PULL_REQUEST_AUTHOR_EMAIL;
 const authorIconUrl: string = process.env.PULL_REQUEST_AUTHOR_ICON_URL;
 const compareBranchName: string = process.env.PULL_REQUEST_COMPARE_BRANCH_NAME;
 const baseBranchName: string = process.env.PULL_REQUEST_BASE_BRANCH_NAME;
@@ -27,7 +26,7 @@ if (makePretty) {
                     block_id: "commit_title",
                     text: {
                         type: "mrkdwn",
-                        text: prNum + "*" + prTitle + "* requests merge from *" + baseBranchName + "* to *" + compareBranchName + "." + sendHereMention
+                        text: "*<" + prUrl + "|" + prTitle + ">* #" + prNum + " for *" + baseBranchName + "* to *" + compareBranchName + "*." + sendHereMention
                     }
                 },
                 {
@@ -59,17 +58,6 @@ if (makePretty) {
                         url: prUrl,
                         action_id: "actionId-0",
                         style: "primary"
-                    },
-                    {
-                        type: "button",
-                        text: {
-                            type: "plain_text",
-                            text: "Contact " + authorEmail,
-                            emoji: true
-                        },
-                        value: "Author's email",
-                        url: "mailto:" + authorEmail,
-                        action_id: "actionId-1"
                     }
                     ]
                 }
@@ -99,7 +87,7 @@ if (makePretty) {
                 },
                 {
                     type: "mrkdwn",
-                    text: "*<" + authorName + "|mailto:" + authorEmail + ">*"
+                    text: "*" + authorName + "*"
                 }
             ]
         }
