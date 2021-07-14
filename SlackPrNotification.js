@@ -8,62 +8,67 @@ var prUrl = process.env.PULL_REQUEST_URL;
 var prBody = process.env.PULL_REQUEST_BODY || "No description provided.";
 var authorName = process.env.PULL_REQUEST_AUTHOR_NAME;
 var authorIconUrl = process.env.PULL_REQUEST_AUTHOR_ICON_URL;
+var compareBranchOwner = process.env.PULL_REQUEST_COMPARE_BRANCH_OWNER;
 var compareBranchName = process.env.PULL_REQUEST_COMPARE_BRANCH_NAME;
+var baseBranchOwner = process.env.PULL_REQUEST_BASE_BRANCH_OWNER;
 var baseBranchName = process.env.PULL_REQUEST_BASE_BRANCH_NAME;
 var sendHereMention = process.env.IS_SEND_HERE_MENTION.toLowerCase() === "true" ? "<!here>\n" : "";
-var makePretty  = process.env.MAKE_PRETTY.toLowerCase() === "true"; //Priority is pretty > compact > normal
+var prFromFork = process.env.IS_PR_FROM_FORK;
+var compareBranchText = prFromFork === "true" ? "*Compare branch*\n" + compareBranchOwner + ":" + compareBranchName : "*Compare branch*\n" + compareBranchName;
+var baseBranchText = prFromFork === "true" ? "*Base branch*\n" + baseBranchOwner + ":" + baseBranchName : "*Base branch*\n" + baseBranchName;
+var makePretty = process.env.MAKE_PRETTY.toLowerCase() === "true"; //Priority is pretty > compact > normal
 var makeCompact = process.env.MAKE_COMPACT.toLowerCase() === "true";
-
-if (makePretty){
+if (makePretty) {
     var message = {
         attachments: [
             {
                 color: "#00ff00",
                 blocks: [
-                {
-                    type: "section",
-                    block_id: "commit_title",
-                    text: {
-                        type: "mrkdwn",
-                        text: "[*#" + prNum + "*] *" + prTitle + "* requests merge from *" + baseBranchName + "* to *" + compareBranchName + "*." + sendHereMention
-                    }
-                },
-                {
-                    type: "context",
-                    block_id: "committer_meta",
-                    elements: [
-                        {
-                            type: "image",
-                            image_url: authorIconUrl,
-                            alt_text: "images"
-                        },
-                        {
-                            type: "mrkdwn",
-                            text: authorName
-                        }
-                    ]
-                },
-                {
-                    type: "actions",
-                    elements: [
                     {
-                        type: "button",
+                        type: "section",
+                        block_id: "commit_title",
                         text: {
-                            type: "plain_text",
-                            text: "See Pull Request",
-                            emoji: true
-                        },
-                        value: prTitle,
-                        url: prUrl,
-                        action_id: "actionId-0",
-                        style: "primary"
+                            type: "mrkdwn",
+                            text: "*<" + prUrl + "|" + prTitle + ">* #" + prNum + " from *" + baseBranchName + "* to *" + compareBranchName + "*." + sendHereMention
+                        }
+                    },
+                    {
+                        type: "context",
+                        block_id: "committer_meta",
+                        elements: [
+                            {
+                                type: "image",
+                                image_url: authorIconUrl,
+                                alt_text: "images"
+                            },
+                            {
+                                type: "mrkdwn",
+                                text: authorName
+                            }
+                        ]
+                    },
+                    {
+                        type: "actions",
+                        elements: [
+                            {
+                                type: "button",
+                                text: {
+                                    type: "plain_text",
+                                    text: "See Pull Request",
+                                    emoji: true
+                                },
+                                value: prTitle,
+                                url: prUrl,
+                                action_id: "actionId-0",
+                                style: "primary"
+                            }
+                        ]
                     }
-                    ]
-                }
                 ]
             }
         ]
-    }
+    };
+    axios_1["default"].post(url, message);
 }
 else if (makeCompact) {
     var message = {
@@ -92,9 +97,10 @@ else if (makeCompact) {
                 ]
             }
         ]
-    }
+    };
+    axios_1["default"].post(url, message);
 }
-else{
+else {
     var message = {
         blocks: [
             {
@@ -115,7 +121,7 @@ else{
                     },
                     {
                         type: "mrkdwn",
-                        text: "*Base branch*\n" + baseBranchName
+                        text: baseBranchText
                     },
                     {
                         type: "mrkdwn",
@@ -123,7 +129,7 @@ else{
                     },
                     {
                         type: "mrkdwn",
-                        text: "*Compare branch*\n" + compareBranchName
+                        text: compareBranchText
                     },
                 ]
             },
@@ -137,5 +143,5 @@ else{
             },
         ]
     };
+    axios_1["default"].post(url, message);
 }
-axios_1["default"].post(url, message);
