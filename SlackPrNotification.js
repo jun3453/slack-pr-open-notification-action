@@ -7,6 +7,7 @@ var prTitle = process.env.PULL_REQUEST_TITLE;
 var prUrl = process.env.PULL_REQUEST_URL;
 var prBody = process.env.PULL_REQUEST_BODY || "No description provided.";
 var authorName = process.env.PULL_REQUEST_AUTHOR_NAME;
+var authorEmail = process.env.PULL_REQUEST_AUTHOR_EMAIL;
 var authorIconUrl = process.env.PULL_REQUEST_AUTHOR_ICON_URL;
 var compareBranchName = process.env.PULL_REQUEST_COMPARE_BRANCH_NAME;
 var baseBranchName = process.env.PULL_REQUEST_BASE_BRANCH_NAME;
