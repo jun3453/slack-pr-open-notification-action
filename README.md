@@ -29,6 +29,7 @@ jobs:
         PULL_REQUEST_COMPARE_BRANCH_NAME : ${{ github.event.pull_request.head.ref }}
         PULL_REQUEST_BASE_BRANCH_NAME : ${{ github.event.pull_request.base.ref }}
         IS_SEND_HERE_MENTION : true
+        MAKE_PRETTY : true
       uses: jun3453/slack-pr-open-notification-action@v1.0.3
 ```
 
@@ -41,3 +42,9 @@ See the following URL. https://developer.github.com/v3/pulls/
 
 #### IS_SEND_HERE_MENTION
 boolean. Whether to include a mention here when sending a message.
+
+#### MAKE_PRETTY
+boolean. Makes reading the info easier. Adds a "See Pull Request" button.
+
+#### MAKE_COMPACT
+boolean. Smaller visual footprint.
