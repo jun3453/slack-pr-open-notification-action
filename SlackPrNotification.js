@@ -16,46 +16,132 @@ var sendHereMention = process.env.IS_SEND_HERE_MENTION.toLowerCase() === "true" 
 var prFromFork = process.env.IS_PR_FROM_FORK;
 var compareBranchText = prFromFork === "true" ? "*Compare branch*\n" + compareBranchOwner + ":" + compareBranchName : "*Compare branch*\n" + compareBranchName;
 var baseBranchText = prFromFork === "true" ? "*Base branch*\n" + baseBranchOwner + ":" + baseBranchName : "*Base branch*\n" + baseBranchName;
-var message = {
-    blocks: [
-        {
-            type: "section",
-            text: {
-                type: "mrkdwn",
-                text: sendHereMention + "*<" + prUrl + "|" + prTitle + ">*"
-            },
-            accessory: {
-                type: "image",
-                image_url: authorIconUrl,
-                alt_text: "github icon"
-            },
-            fields: [
-                {
-                    type: "mrkdwn",
-                    text: "*Author*\n" + authorName
-                },
-                {
-                    type: "mrkdwn",
-                    text: baseBranchText
-                },
-                {
-                    type: "mrkdwn",
-                    text: "*Pull request number*\n#" + prNum
-                },
-                {
-                    type: "mrkdwn",
-                    text: compareBranchText
-                },
-            ]
-        },
-        {
-            type: "section",
-            text: {
-                type: "plain_text",
-                text: prBody,
-                emoji: true
+var makePretty = process.env.MAKE_PRETTY.toLowerCase() === "true"; //Priority is pretty > compact > normal
+var makeCompact = process.env.MAKE_COMPACT.toLowerCase() === "true";
+if (makePretty) {
+    var message = {
+        attachments: [
+            {
+                color: "#00ff00",
+                blocks: [
+                    {
+                        type: "section",
+                        block_id: "commit_title",
+                        text: {
+                            type: "mrkdwn",
+                            text: "*<" + prUrl + "|" + prTitle + ">* #" + prNum + " from *" + baseBranchName + "* to *" + compareBranchName + "*." + sendHereMention
+                        }
+                    },
+                    {
+                        type: "context",
+                        block_id: "committer_meta",
+                        elements: [
+                            {
+                                type: "image",
+                                image_url: authorIconUrl,
+                                alt_text: "images"
+                            },
+                            {
+                                type: "mrkdwn",
+                                text: authorName
+                            }
+                        ]
+                    },
+                    {
+                        type: "actions",
+                        elements: [
+                            {
+                                type: "button",
+                                text: {
+                                    type: "plain_text",
+                                    text: "See Pull Request",
+                                    emoji: true
+                                },
+                                value: prTitle,
+                                url: prUrl,
+                                action_id: "actionId-0",
+                                style: "primary"
+                            }
+                        ]
+                    }
+                ]
             }
-        },
-    ]
-};
-axios_1["default"].post(url, message);
+        ]
+    };
+    axios_1["default"].post(url, message);
+}
+else if (makeCompact) {
+    var message = {
+        blocks: [
+            {
+                type: "section",
+                block_id: "commit_title",
+                text: {
+                    type: "mrkdwn",
+                    text: "*<" + prUrl + "|" + prTitle + ">* #" + prNum + " from *" + baseBranchName + "* to *" + compareBranchName + "*." + sendHereMention
+                }
+            },
+            {
+                type: "context",
+                block_id: "committer_meta",
+                elements: [
+                    {
+                        type: "image",
+                        image_url: authorIconUrl,
+                        alt_text: "images"
+                    },
+                    {
+                        type: "mrkdwn",
+                        text: "*" + authorName + "*"
+                    }
+                ]
+            }
+        ]
+    };
+    axios_1["default"].post(url, message);
+}
+else {
+    var message = {
+        blocks: [
+            {
+                type: "section",
+                text: {
+                    type: "mrkdwn",
+                    text: sendHereMention + "*<" + prUrl + "|" + prTitle + ">*"
+                },
+                accessory: {
+                    type: "image",
+                    image_url: authorIconUrl,
+                    alt_text: "github icon"
+                },
+                fields: [
+                    {
+                        type: "mrkdwn",
+                        text: "*Author*\n" + authorName
+                    },
+                    {
+                        type: "mrkdwn",
+                        text: baseBranchText
+                    },
+                    {
+                        type: "mrkdwn",
+                        text: "*Pull request number*\n#" + prNum
+                    },
+                    {
+                        type: "mrkdwn",
+                        text: compareBranchText
+                    },
+                ]
+            },
+            {
+                type: "section",
+                text: {
+                    type: "plain_text",
+                    text: prBody,
+                    emoji: true
+                }
+            },
+        ]
+    };
+    axios_1["default"].post(url, message);
+}

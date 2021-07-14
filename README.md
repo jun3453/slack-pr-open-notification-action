@@ -17,22 +17,24 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Send Slack Notification
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          PULL_REQUEST_NUMBER: ${{ github.event.pull_request.number }}
-          PULL_REQUEST_TITLE: ${{ github.event.pull_request.title }}
-          PULL_REQUEST_AUTHOR_NAME: ${{ github.event.pull_request.user.login }}
-          PULL_REQUEST_AUTHOR_ICON_URL: ${{ github.event.pull_request.user.avatar_url }}
-          PULL_REQUEST_URL: ${{ github.event.pull_request.html_url }}
-          PULL_REQUEST_BODY: ${{ github.event.pull_request.body }}
-          PULL_REQUEST_COMPARE_BRANCH_OWNER: ${{ github.event.pull_request.head.repo.owner.login }}
-          PULL_REQUEST_COMPARE_BRANCH_NAME: ${{ github.event.pull_request.head.ref }}
-          PULL_REQUEST_BASE_BRANCH_OWNER: ${{ github.event.pull_request.base.repo.owner.login }}
-          PULL_REQUEST_BASE_BRANCH_NAME: ${{ github.event.pull_request.base.ref }}
-          IS_SEND_HERE_MENTION: true
-          IS_PR_FROM_FORK: false
-        uses: jun3453/slack-pr-open-notification-action@master
+    - name: Notify slack pr open
+      env: 
+        SLACK_WEBHOOK_URL : ${{ secrets.SLACK_WEBHOOK_URL }}
+        PULL_REQUEST_NUMBER : ${{ github.event.pull_request.number }}
+        PULL_REQUEST_TITLE : ${{ github.event.pull_request.title }}
+        PULL_REQUEST_AUTHOR_NAME : ${{ github.event.pull_request.user.login }}
+        PULL_REQUEST_AUTHOR_ICON_URL : ${{ github.event.pull_request.user.avatar_url }}
+        PULL_REQUEST_URL : ${{ github.event.pull_request.html_url }}
+        PULL_REQUEST_BODY : ${{ github.event.pull_request.body }}
+        PULL_REQUEST_COMPARE_BRANCH_OWNER: ${{ github.event.pull_request.head.repo.owner.login }}
+        PULL_REQUEST_COMPARE_BRANCH_NAME : ${{ github.event.pull_request.head.ref }}
+        PULL_REQUEST_BASE_BRANCH_OWNER: ${{ github.event.pull_request.base.repo.owner.login }}
+        PULL_REQUEST_BASE_BRANCH_NAME : ${{ github.event.pull_request.base.ref }}
+        IS_SEND_HERE_MENTION : true
+        MAKE_PRETTY : false
+        MAKE_COMPACT : false
+        IS_PR_FROM_FORK: false
+      uses: jun3453/slack-pr-open-notification-action@v1.1.0
 ```
 
 ### Arguments
@@ -50,3 +52,15 @@ Whether to include the '@here' Slack mention when sending a message.
 **boolean (DEFAULT: false)**  
 Whether notifications should support PRs from forks. By default, only the branch name is listed when sending a message.  
 If set to 'true', it will add the branch owner in front of the branch name ('owner:branch' vs 'branch'). If this option is used, you may need to enable fork pull request workflows under your repository's Actions settings.
+
+#### MAKE_PRETTY
+**boolean (DEFAULT: false)**  
+Pretty prints the information. Adds a "See Pull Request" button.
+
+![make_pretty](https://raw.githubusercontent.com/jun3453/slack-pr-open-notification-action/images/make_pretty.png)
+
+#### MAKE_COMPACT
+**boolean (DEFAULT: false)**  
+Smaller visual footprint.
+
+![make_compact](https://raw.githubusercontent.com/jun3453/slack-pr-open-notification-action/images/make_compact.png)
