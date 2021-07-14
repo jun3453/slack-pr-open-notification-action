@@ -63,7 +63,7 @@ if (makePretty){
                         type: "button",
                         text: {
                             type: "plain_text",
-                            text: "Contact Sender",
+                            text: "Contact" + authorEmail,
                             emoji: true
                         },
                         value: "Author's email",
