@@ -26,80 +26,81 @@ if (makePretty) {
             {
                 color: "#00ff00",
                 blocks: [
-                {
-                    type: "section",
-                    block_id: "commit_title",
-                    text: {
-                        type: "mrkdwn",
-                        text: "*<" + prUrl + "|" + prTitle + ">* #" + prNum + " from *" + baseBranchName + "* to *" + compareBranchName + "*." + sendHereMention
-                    }
-                },
-                {
-                    type: "context",
-                    block_id: "committer_meta",
-                    elements: [
-                        {
-                            type: "image",
-                            image_url: authorIconUrl,
-                            alt_text: "images"
-                        },
-                        {
-                            type: "mrkdwn",
-                            text: authorName
-                        }
-                    ]
-                },
-                {
-                    type: "actions",
-                    elements: [
                     {
-                        type: "button",
+                        type: "section",
+                        block_id: "commit_title",
                         text: {
-                            type: "plain_text",
-                            text: "See Pull Request",
-                            emoji: true
-                        },
-                        value: prTitle,
-                        url: prUrl,
-                        action_id: "actionId-0",
-                        style: "primary"
+                            type: "mrkdwn",
+                            text: "*<" + prUrl + "|" + prTitle + ">* #" + prNum + " from *" + baseBranchText + "* to *" + compareBranchText + "*." + sendHereMention
+                        }
+                    },
+                    {
+                        type: "context",
+                        block_id: "committer_meta",
+                        elements: [
+                            {
+                                type: "image",
+                                image_url: authorIconUrl,
+                                alt_text: "images"
+                            },
+                            {
+                                type: "mrkdwn",
+                                text: authorName
+                            }
+                        ]
+                    },
+                    {
+                        type: "actions",
+                        elements: [
+                            {
+                                type: "button",
+                                text: {
+                                    type: "plain_text",
+                                    text: "See Pull Request",
+                                    emoji: true
+                                },
+                                value: prTitle,
+                                url: prUrl,
+                                action_id: "actionId-0",
+                                style: "primary"
+                            }
+                        ]
                     }
-                    ]
-                }
                 ]
             }
         ]
     }
     axios.post(url, message);
-}else if (makeCompact){ const message: Object = {
-    blocks: [
-        {
-            type: "section",
-            block_id: "commit_title",
-            text: {
-                type: "mrkdwn",
-                text: "*<" + prUrl + "|" + prTitle + ">* #" + prNum + " from *" + baseBranchName + "* to *" + compareBranchName + "*." + sendHereMention
-            }
-        },
-        {
-            type: "context",
-            block_id: "committer_meta",
-            elements: [
-                {
-                    type: "image",
-                    image_url: authorIconUrl,
-                    alt_text: "images"
-                },
-                {
+} else if (makeCompact) {
+    const message: Object = {
+        blocks: [
+            {
+                type: "section",
+                block_id: "commit_title",
+                text: {
                     type: "mrkdwn",
-                    text: "*" + authorName + "*"
+                    text: "*<" + prUrl + "|" + prTitle + ">* #" + prNum + " from *" + baseBranchText + "* to *" + compareBranchText + "*." + sendHereMention
                 }
-            ]
-        }
-    ]
+            },
+            {
+                type: "context",
+                block_id: "committer_meta",
+                elements: [
+                    {
+                        type: "image",
+                        image_url: authorIconUrl,
+                        alt_text: "images"
+                    },
+                    {
+                        type: "mrkdwn",
+                        text: "*" + authorName + "*"
+                    }
+                ]
+            }
+        ]
     }
     axios.post(url, message);
-}else {
+} else {
     const message: Object = {
         blocks: [
             {
