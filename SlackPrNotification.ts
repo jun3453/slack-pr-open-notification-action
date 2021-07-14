@@ -14,8 +14,8 @@ const baseBranchName: string = process.env.PULL_REQUEST_BASE_BRANCH_NAME;
 const sendHereMention: string = process.env.IS_SEND_HERE_MENTION.toLowerCase() === "true" ? "<!here>\n" : "";
 
 const prFromFork: string = process.env.IS_PR_FROM_FORK;
-const compareBranchText: string = prFromFork === "true" ? "*Compare branch*\n" + compareBranchOwner + ":" + compareBranchName : "*Compare branch*\n" + compareBranchName;
-const baseBranchText: string = prFromFork === "true" ? "*Base branch*\n" + baseBranchOwner + ":" + baseBranchName : "*Base branch*\n" + baseBranchName;
+const compareBranchText: string = prFromFork === "true" ? compareBranchOwner + ":" + compareBranchName : compareBranchName;
+const baseBranchText: string = prFromFork === "true" ? baseBranchOwner + ":" + baseBranchName : baseBranchName;
 
 const makePretty: boolean = process.env.MAKE_PRETTY.toLowerCase() === "true"; //Priority is pretty > compact > normal
 const makeCompact: boolean = process.env.MAKE_COMPACT.toLowerCase() === "true";
@@ -121,7 +121,7 @@ if (makePretty) {
                     },
                     {
                         type: "mrkdwn",
-                        text: baseBranchText,
+                        text: "*Base branch*\n" + baseBranchText,
                     },
                     {
                         type: "mrkdwn",
@@ -129,7 +129,7 @@ if (makePretty) {
                     },
                     {
                         type: "mrkdwn",
-                        text: compareBranchText,
+                        text: "*Compare branch*\n" + compareBranchText,
                     },
                 ],
             },
