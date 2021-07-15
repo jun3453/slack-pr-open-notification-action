@@ -28,12 +28,12 @@ jobs:
         PULL_REQUEST_BODY : ${{ github.event.pull_request.body }}
         PULL_REQUEST_COMPARE_BRANCH_OWNER: ${{ github.event.pull_request.head.repo.owner.login }}
         PULL_REQUEST_COMPARE_BRANCH_NAME : ${{ github.event.pull_request.head.ref }}
+        PULL_REQUEST_BASE_REPO_NAME: ${{ github.event.pull_request.base.repo.name }}
         PULL_REQUEST_BASE_BRANCH_OWNER: ${{ github.event.pull_request.base.repo.owner.login }}
         PULL_REQUEST_BASE_BRANCH_NAME : ${{ github.event.pull_request.base.ref }}
         IS_SEND_HERE_MENTION : true
         MAKE_PRETTY : false
         MAKE_COMPACT : false
-        IS_PR_FROM_FORK: false
       uses: jun3453/slack-pr-open-notification-action@v1.2.0
 ```
 
@@ -59,10 +59,3 @@ Pretty prints the information. Adds a "See Pull Request" button.
 Smaller visual footprint.
 
 ![make_compact](https://raw.githubusercontent.com/jun3453/slack-pr-open-notification-action/images/make_compact.png)
-
-#### IS_PR_FROM_FORK
-**boolean (DEFAULT: false)**  
-Whether notifications should support PRs from forks. By default, only the branch name is listed when sending a message.  
-If set to 'true', it will add the branch owner in front of the branch name ('owner:branch' vs 'branch'). If this option is used, you may need to enable fork pull request workflows under your repository's Actions settings.
-
-![make_compact and is_pr_fork](https://raw.githubusercontent.com/jun3453/slack-pr-open-notification-action/images/make_compact_fork.png)
