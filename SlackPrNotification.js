@@ -48,6 +48,14 @@ if (makePretty) {
                         ]
                     },
                     {
+                        type: "section",
+                        block_id: "pr_description",
+                        text: {
+                            type: "mrkdwn",
+                            text: prBody
+                        }
+                    },
+                    {
                         type: "actions",
                         elements: [
                             {
