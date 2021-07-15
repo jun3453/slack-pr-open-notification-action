@@ -19,7 +19,6 @@ var makeCompact = process.env.MAKE_COMPACT.toLowerCase() === "true";
 var baseBranchText = baseBranchOwner + ":" + baseBranchName;
 var compareBranchText = compareBranchOwner !== baseBranchOwner ? compareBranchOwner + ":" + compareBranchName : compareBranchName;
 
-
 if (makePretty) {
     var message = {
         attachments: [

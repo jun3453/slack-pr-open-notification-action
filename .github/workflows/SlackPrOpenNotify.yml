@@ -24,5 +24,4 @@ jobs:
         IS_SEND_HERE_MENTION : true
         MAKE_PRETTY : false
         MAKE_COMPACT : false
-        IS_PR_FROM_FORK: false
       uses: jun3453/slack-pr-open-notification-action@v1.1.0
