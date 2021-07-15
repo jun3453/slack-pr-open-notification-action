@@ -10,13 +10,14 @@ var authorName = process.env.PULL_REQUEST_AUTHOR_NAME;
 var authorIconUrl = process.env.PULL_REQUEST_AUTHOR_ICON_URL;
 var compareBranchOwner = process.env.PULL_REQUEST_COMPARE_BRANCH_OWNER;
 var compareBranchName = process.env.PULL_REQUEST_COMPARE_BRANCH_NAME;
+var baseRepoName = process.env.PULL_REQUEST_BASE_REPO_NAME;
 var baseBranchOwner = process.env.PULL_REQUEST_BASE_BRANCH_OWNER;
 var baseBranchName = process.env.PULL_REQUEST_BASE_BRANCH_NAME;
 var sendHereMention = process.env.IS_SEND_HERE_MENTION.toLowerCase() === "true" ? "<!here>\n" : "";
 var makePretty = process.env.MAKE_PRETTY.toLowerCase() === "true"; //Priority is pretty > compact > normal
 var makeCompact = process.env.MAKE_COMPACT.toLowerCase() === "true";
 
-var baseBranchText = baseBranchOwner + ":" + baseBranchName;
+var baseBranchText = baseRepoName + ":" + baseBranchName;
 var compareBranchText = compareBranchOwner !== baseBranchOwner ? compareBranchOwner + ":" + compareBranchName : compareBranchName;
 
 if (makePretty) {
