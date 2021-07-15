@@ -13,12 +13,20 @@ const baseBranchOwner: string = process.env.PULL_REQUEST_BASE_BRANCH_OWNER;
 const baseBranchName: string = process.env.PULL_REQUEST_BASE_BRANCH_NAME;
 const sendHereMention: string = process.env.IS_SEND_HERE_MENTION.toLowerCase() === "true" ? "<!here>\n" : "";
 
-const prFromFork: string = process.env.IS_PR_FROM_FORK;
-const compareBranchText: string = prFromFork === "true" ? compareBranchOwner + ":" + compareBranchName : compareBranchName;
-const baseBranchText: string = prFromFork === "true" ? baseBranchOwner + ":" + baseBranchName : baseBranchName;
-
 const makePretty: boolean = process.env.MAKE_PRETTY.toLowerCase() === "true"; //Priority is pretty > compact > normal
 const makeCompact: boolean = process.env.MAKE_COMPACT.toLowerCase() === "true";
+const alwaysShowOWner: boolean = process.env.ALWAYS_SHOW_OWNER.toLowerCase() === "true";
+
+var compareBranchText: string;
+var baseBranchText: string;
+
+if (!alwaysShowOWner){
+    compareBranchText = compareBranchName !== baseBranchName ? compareBranchOwner + ":" + compareBranchName : compareBranchName;
+    baseBranchText = baseBranchName !== compareBranchName ? baseBranchOwner + ":" + baseBranchName : baseBranchName;
+}else {
+    compareBranchText = compareBranchOwner + ":" + compareBranchName;
+    baseBranchText = baseBranchOwner + ":" + baseBranchName;
+}
 
 if (makePretty) {
     const message: Object = {

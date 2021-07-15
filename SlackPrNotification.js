@@ -13,11 +13,19 @@ var compareBranchName = process.env.PULL_REQUEST_COMPARE_BRANCH_NAME;
 var baseBranchOwner = process.env.PULL_REQUEST_BASE_BRANCH_OWNER;
 var baseBranchName = process.env.PULL_REQUEST_BASE_BRANCH_NAME;
 var sendHereMention = process.env.IS_SEND_HERE_MENTION.toLowerCase() === "true" ? "<!here>\n" : "";
-var prFromFork = process.env.IS_PR_FROM_FORK;
-var compareBranchText = prFromFork === "true" ? compareBranchOwner + ":" + compareBranchName : compareBranchName;
-var baseBranchText = prFromFork === "true" ? baseBranchOwner + ":" + baseBranchName : baseBranchName;
 var makePretty = process.env.MAKE_PRETTY.toLowerCase() === "true"; //Priority is pretty > compact > normal
 var makeCompact = process.env.MAKE_COMPACT.toLowerCase() === "true";
+var alwaysShowOWner = process.env.ALWAYS_SHOW_OWNER;
+
+if (!alwaysShowOWner){
+    var compareBranchText = compareBranchName !== baseBranchName ? compareBranchOwner + ":" + compareBranchName : compareBranchName;
+    var baseBranchText = baseBranchName !== compareBranchName ? baseBranchOwner + ":" + baseBranchName : baseBranchName;
+}else {
+    var compareBranchText = compareBranchOwner + ":" + compareBranchName;
+    var baseBranchText = baseBranchOwner + ":" + baseBranchName;
+}
+
+
 if (makePretty) {
     var message = {
         attachments: [
@@ -29,7 +37,7 @@ if (makePretty) {
                         block_id: "commit_title",
                         text: {
                             type: "mrkdwn",
-                            text: "[*#" + prNum + "*] *" + prTitle + "* requests merge from *" + baseBranchName + "* to *" + compareBranchName + "*." + sendHereMention
+                            text: "[*#" + prNum + "*] *" + prTitle + "* from *" + baseBranchText + "* to *" + compareBranchText + "*." + sendHereMention
                         }
                     },
                     {
@@ -46,6 +54,14 @@ if (makePretty) {
                                 text: authorName
                             }
                         ]
+                    },                    
+                    {
+                        type: "section",
+                        block_id: "pr_description",
+                        text: {
+                            type: "mrkdwn",
+                            text: prBody
+                        }
                     },
                     {
                         type: "actions",
