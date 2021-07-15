@@ -21,8 +21,8 @@ var compareBranchText: string;
 var baseBranchText: string;
 
 if (!alwaysShowOWner){
-    compareBranchText = compareBranchName !== baseBranchName ? compareBranchOwner + ":" + compareBranchName : compareBranchName;
-    baseBranchText = baseBranchName !== compareBranchName ? baseBranchOwner + ":" + baseBranchName : baseBranchName;
+    compareBranchText = compareBranchOwner !== baseBranchOwner ? compareBranchOwner + ":" + compareBranchName : compareBranchName;
+    baseBranchText = baseBranchOwner !== compareBranchOwner ? baseBranchOwner + ":" + baseBranchName : baseBranchName;
 }else {
     compareBranchText = compareBranchOwner + ":" + compareBranchName;
     baseBranchText = baseBranchOwner + ":" + baseBranchName;

@@ -18,8 +18,8 @@ var makeCompact = process.env.MAKE_COMPACT.toLowerCase() === "true";
 var alwaysShowOWner = process.env.ALWAYS_SHOW_OWNER;
 
 if (!alwaysShowOWner){
-    var compareBranchText = compareBranchName !== baseBranchName ? compareBranchOwner + ":" + compareBranchName : compareBranchName;
-    var baseBranchText = baseBranchName !== compareBranchName ? baseBranchOwner + ":" + baseBranchName : baseBranchName;
+    var compareBranchText = compareBranchOwner !== baseBranchOwner ? compareBranchOwner + ":" + compareBranchName : compareBranchName;
+    var baseBranchText = baseBranchOwner !== compareBranchOwner ? baseBranchOwner + ":" + baseBranchName : baseBranchName;
 }else {
     var compareBranchText = compareBranchOwner + ":" + compareBranchName;
     var baseBranchText = baseBranchOwner + ":" + baseBranchName;
