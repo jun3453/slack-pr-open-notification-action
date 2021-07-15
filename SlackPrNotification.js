@@ -29,7 +29,7 @@ if (makePretty) {
                         block_id: "commit_title",
                         text: {
                             type: "mrkdwn",
-                            text: "[*#" + prNum + "*] *" + prTitle + "* requests merge from *" + baseBranchName + "* to *" + compareBranchName + "*." + sendHereMention
+                            text: "[*#" + prNum + "*] *" + prTitle + "* from *" + baseBranchName + "* to *" + compareBranchName + "*." + sendHereMention
                         }
                     },
                     {
