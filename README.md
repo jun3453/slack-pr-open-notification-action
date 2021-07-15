@@ -33,7 +33,6 @@ jobs:
         IS_SEND_HERE_MENTION : true
         MAKE_PRETTY : false
         MAKE_COMPACT : false
-        ALWAYS_SHOW_OWNER: false
       uses: jun3453/slack-pr-open-notification-action@v1.2.0
 ```
 
@@ -59,11 +58,3 @@ Pretty prints the information. Adds a "See Pull Request" button.
 Smaller visual footprint.
 
 ![make_compact](https://raw.githubusercontent.com/jun3453/slack-pr-open-notification-action/images/make_compact.png)
-
-#### ALWAYS_SHOW_OWNER
-**boolean (DEFAULT: false)**  
-By default, if the PR comes from a fork, the owner and branch name are listed when sending a message. ('owner:branch' for external vs 'branch' for internal)
-If set to 'true', it will always show the owner in front of the branch name. 
-Please note that to accept external PRs, you may need to enable fork pull request workflows under your repository's Actions settings.
-
-![make_compact and is_pr_fork](https://raw.githubusercontent.com/jun3453/slack-pr-open-notification-action/images/make_compact_fork.png)

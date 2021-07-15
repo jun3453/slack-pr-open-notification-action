@@ -15,18 +15,9 @@ const sendHereMention: string = process.env.IS_SEND_HERE_MENTION.toLowerCase() =
 
 const makePretty: boolean = process.env.MAKE_PRETTY.toLowerCase() === "true"; //Priority is pretty > compact > normal
 const makeCompact: boolean = process.env.MAKE_COMPACT.toLowerCase() === "true";
-const alwaysShowOWner: boolean = process.env.ALWAYS_SHOW_OWNER.toLowerCase() === "true";
 
-var compareBranchText: string;
-var baseBranchText: string;
-
-if (!alwaysShowOWner){
-    compareBranchText = compareBranchOwner !== baseBranchOwner ? compareBranchOwner + ":" + compareBranchName : compareBranchName;
-    baseBranchText = baseBranchOwner !== compareBranchOwner ? baseBranchOwner + ":" + baseBranchName : baseBranchName;
-}else {
-    compareBranchText = compareBranchOwner + ":" + compareBranchName;
-    baseBranchText = baseBranchOwner + ":" + baseBranchName;
-}
+const baseBranchText: string = baseBranchOwner + ":" + baseBranchName;
+const compareBranchText: string = compareBranchOwner !== baseBranchOwner ? compareBranchOwner + ":" + compareBranchName : compareBranchName;
 
 if (makePretty) {
     const message: Object = {

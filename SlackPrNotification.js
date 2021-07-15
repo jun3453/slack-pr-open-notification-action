@@ -15,15 +15,9 @@ var baseBranchName = process.env.PULL_REQUEST_BASE_BRANCH_NAME;
 var sendHereMention = process.env.IS_SEND_HERE_MENTION.toLowerCase() === "true" ? "<!here>\n" : "";
 var makePretty = process.env.MAKE_PRETTY.toLowerCase() === "true"; //Priority is pretty > compact > normal
 var makeCompact = process.env.MAKE_COMPACT.toLowerCase() === "true";
-var alwaysShowOWner = process.env.ALWAYS_SHOW_OWNER;
 
-if (!alwaysShowOWner){
-    var compareBranchText = compareBranchOwner !== baseBranchOwner ? compareBranchOwner + ":" + compareBranchName : compareBranchName;
-    var baseBranchText = baseBranchOwner !== compareBranchOwner ? baseBranchOwner + ":" + baseBranchName : baseBranchName;
-}else {
-    var compareBranchText = compareBranchOwner + ":" + compareBranchName;
-    var baseBranchText = baseBranchOwner + ":" + baseBranchName;
-}
+var baseBranchText = baseBranchOwner + ":" + baseBranchName;
+var compareBranchText = compareBranchOwner !== baseBranchOwner ? compareBranchOwner + ":" + compareBranchName : compareBranchName;
 
 
 if (makePretty) {
