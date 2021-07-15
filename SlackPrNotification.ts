@@ -9,6 +9,7 @@ const authorName: string = process.env.PULL_REQUEST_AUTHOR_NAME;
 const authorIconUrl: string = process.env.PULL_REQUEST_AUTHOR_ICON_URL;
 const compareBranchOwner: string = process.env.PULL_REQUEST_COMPARE_BRANCH_OWNER;
 const compareBranchName: string = process.env.PULL_REQUEST_COMPARE_BRANCH_NAME;
+const baseRepoName: string = process.env.PULL_REQUEST_BASE_REPO_NAME;
 const baseBranchOwner: string = process.env.PULL_REQUEST_BASE_BRANCH_OWNER;
 const baseBranchName: string = process.env.PULL_REQUEST_BASE_BRANCH_NAME;
 const sendHereMention: string = process.env.IS_SEND_HERE_MENTION.toLowerCase() === "true" ? "<!here>\n" : "";
@@ -16,7 +17,7 @@ const sendHereMention: string = process.env.IS_SEND_HERE_MENTION.toLowerCase() =
 const makePretty: boolean = process.env.MAKE_PRETTY.toLowerCase() === "true"; //Priority is pretty > compact > normal
 const makeCompact: boolean = process.env.MAKE_COMPACT.toLowerCase() === "true";
 
-const baseBranchText: string = baseBranchOwner + ":" + baseBranchName;
+const baseBranchText: string = baseRepoName + ":" + baseBranchName;
 const compareBranchText: string = compareBranchOwner !== baseBranchOwner ? compareBranchOwner + ":" + compareBranchName : compareBranchName;
 
 if (makePretty) {
@@ -78,7 +79,7 @@ if (makePretty) {
                 block_id: "commit_title",
                 text: {
                     type: "mrkdwn",
-                    text: "*<" + prUrl + "|" + prTitle + ">* #" + prNum + " from *" + baseBranchText + "* to *" + compareBranchText + "*." + sendHereMention
+                    text: "*<" + prUrl + "|" + prTitle + ">* #" + prNum + " from *" + compareBranchText + "* to *" + baseBranchText + "*." + sendHereMention
                 }
             },
             {
