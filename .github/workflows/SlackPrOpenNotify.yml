@@ -1,4 +1,4 @@
-name: Slack pull request open notification
+name: Slack Pull Request Open Notification
 
 on:
   pull_request:
@@ -17,7 +17,12 @@ jobs:
         PULL_REQUEST_AUTHOR_ICON_URL : ${{ github.event.pull_request.user.avatar_url }}
         PULL_REQUEST_URL : ${{ github.event.pull_request.html_url }}
         PULL_REQUEST_BODY : ${{ github.event.pull_request.body }}
+        PULL_REQUEST_COMPARE_BRANCH_OWNER: ${{ github.event.pull_request.head.repo.owner.login }}
         PULL_REQUEST_COMPARE_BRANCH_NAME : ${{ github.event.pull_request.head.ref }}
+        PULL_REQUEST_BASE_BRANCH_OWNER: ${{ github.event.pull_request.base.repo.owner.login }}
         PULL_REQUEST_BASE_BRANCH_NAME : ${{ github.event.pull_request.base.ref }}
         IS_SEND_HERE_MENTION : true
-      uses: jun3453/slack-pr-open-notification-action@master
+        MAKE_PRETTY : false
+        MAKE_COMPACT : false
+        IS_PR_FROM_FORK: false
+      uses: jun3453/slack-pr-open-notification-action@v1.1.0
