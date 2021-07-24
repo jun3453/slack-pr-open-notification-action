@@ -16,8 +16,8 @@ var sendHereMention = process.env.IS_SEND_HERE_MENTION.toLowerCase() === "true" 
 var prFromFork = process.env.IS_PR_FROM_FORK;
 var compareBranchText = prFromFork === "true" ? compareBranchOwner + ":" + compareBranchName : compareBranchName;
 var baseBranchText = prFromFork === "true" ? baseBranchOwner + ":" + baseBranchName : baseBranchName;
-var makePretty = process.env.MAKE_PRETTY.toLowerCase() === "true"; //Priority is pretty > compact > normal
-var makeCompact = process.env.MAKE_COMPACT.toLowerCase() === "true";
+var makePretty = process.env.MAKE_PRETTY ? process.env.MAKE_PRETTY.toLowerCase() === "true" : false; //Priority is pretty > compact > normal
+var makeCompact = process.env.MAKE_COMPACT ? process.env.MAKE_COMPACT.toLowerCase() === "true" : false;
 if (makePretty) {
     var message = {
         attachments: [
