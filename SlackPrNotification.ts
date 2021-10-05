@@ -11,7 +11,16 @@ const compareBranchOwner: string = process.env.PULL_REQUEST_COMPARE_BRANCH_OWNER
 const compareBranchName: string = process.env.PULL_REQUEST_COMPARE_BRANCH_NAME;
 const baseBranchOwner: string = process.env.PULL_REQUEST_BASE_BRANCH_OWNER;
 const baseBranchName: string = process.env.PULL_REQUEST_BASE_BRANCH_NAME;
-const sendHereMention: string = process.env.IS_SEND_HERE_MENTION.toLowerCase() === "true" ? "<!here>\n" : "";
+
+const sendHereMention: string = process.env.IS_SEND_HERE_MENTION.toLowerCase() === "true" ? "<!here>" : "";
+const sendUserIDMentions: string = process.env.SEND_USER_ID_MENTIONS ? process.env.SEND_USER_ID_MENTIONS.split(",").map(id => {
+    return "<@" + id + ">"
+}).join(" ") : ""
+const sendGroupIDMentions: string = process.env.SEND_GROUP_ID_MENTIONS ? process.env.SEND_GROUP_ID_MENTIONS.split(",").map(id => {
+    return "<!subteam^" + id + ">"
+}).join(" ") : ""
+
+const mentions = sendHereMention + sendUserIDMentions + sendGroupIDMentions + "\n"
 
 const prFromFork: string = process.env.IS_PR_FROM_FORK;
 const compareBranchText: string = prFromFork === "true" ? compareBranchOwner + ":" + compareBranchName : compareBranchName;
@@ -31,7 +40,7 @@ if (makePretty) {
                         block_id: "commit_title",
                         text: {
                             type: "mrkdwn",
-                            text: "*<" + prUrl + "|" + prTitle + ">* #" + prNum + " from *" + baseBranchText + "* to *" + compareBranchText + "*." + sendHereMention
+                            text: "*<" + prUrl + "|" + prTitle + ">* #" + prNum + " from *" + baseBranchText + "* to *" + compareBranchText + "*." + mentions
                         }
                     },
                     {
@@ -79,7 +88,7 @@ if (makePretty) {
                 block_id: "commit_title",
                 text: {
                     type: "mrkdwn",
-                    text: "*<" + prUrl + "|" + prTitle + ">* #" + prNum + " from *" + baseBranchText + "* to *" + compareBranchText + "*." + sendHereMention
+                    text: "*<" + prUrl + "|" + prTitle + ">* #" + prNum + " from *" + baseBranchText + "* to *" + compareBranchText + "*." + mentions
                 }
             },
             {
@@ -107,7 +116,7 @@ if (makePretty) {
                 type: "section",
                 text: {
                     type: "mrkdwn",
-                    text: sendHereMention + "*<" + prUrl + "|" + prTitle + ">*",
+                    text: mentions + "*<" + prUrl + "|" + prTitle + ">*",
                 },
                 accessory: {
                     type: "image",

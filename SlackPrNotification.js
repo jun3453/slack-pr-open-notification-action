@@ -12,12 +12,19 @@ var compareBranchOwner = process.env.PULL_REQUEST_COMPARE_BRANCH_OWNER;
 var compareBranchName = process.env.PULL_REQUEST_COMPARE_BRANCH_NAME;
 var baseBranchOwner = process.env.PULL_REQUEST_BASE_BRANCH_OWNER;
 var baseBranchName = process.env.PULL_REQUEST_BASE_BRANCH_NAME;
-var sendHereMention = process.env.IS_SEND_HERE_MENTION.toLowerCase() === "true" ? "<!here>\n" : "";
+var sendHereMention = process.env.IS_SEND_HERE_MENTION.toLowerCase() === "true" ? "<!here>" : "";
+var sendUserIDMentions = process.env.SEND_USER_ID_MENTIONS ? process.env.SEND_USER_ID_MENTIONS.split(",").map(function (id) {
+    return "<@" + id + ">";
+}).join(" ") : "";
+var sendGroupIDMentions = process.env.SEND_GROUP_ID_MENTIONS ? process.env.SEND_GROUP_ID_MENTIONS.split(",").map(function (id) {
+    return "<!subteam^" + id + ">";
+}).join(" ") : "";
+var mentions = sendHereMention + sendUserIDMentions + sendGroupIDMentions + "\n";
 var prFromFork = process.env.IS_PR_FROM_FORK;
 var compareBranchText = prFromFork === "true" ? compareBranchOwner + ":" + compareBranchName : compareBranchName;
 var baseBranchText = prFromFork === "true" ? baseBranchOwner + ":" + baseBranchName : baseBranchName;
-var makePretty = process.env.MAKE_PRETTY ? process.env.MAKE_PRETTY.toLowerCase() === "true" : false; //Priority is pretty > compact > normal
-var makeCompact = process.env.MAKE_COMPACT ? process.env.MAKE_COMPACT.toLowerCase() === "true" : false;
+var makePretty = process.env.MAKE_PRETTY.toLowerCase() === "true"; //Priority is pretty > compact > normal
+var makeCompact = process.env.MAKE_COMPACT.toLowerCase() === "true";
 if (makePretty) {
     var message = {
         attachments: [
@@ -29,7 +36,7 @@ if (makePretty) {
                         block_id: "commit_title",
                         text: {
                             type: "mrkdwn",
-                            text: "*<" + prUrl + "|" + prTitle + ">* #" + prNum + " from *" + baseBranchText + "* to *" + compareBranchText + "*." + sendHereMention
+                            text: "*<" + prUrl + "|" + prTitle + ">* #" + prNum + " from *" + baseBranchText + "* to *" + compareBranchText + "*." + mentions
                         }
                     },
                     {
@@ -78,7 +85,7 @@ else if (makeCompact) {
                 block_id: "commit_title",
                 text: {
                     type: "mrkdwn",
-                    text: "*<" + prUrl + "|" + prTitle + ">* #" + prNum + " from *" + baseBranchText + "* to *" + compareBranchText + "*." + sendHereMention
+                    text: "*<" + prUrl + "|" + prTitle + ">* #" + prNum + " from *" + baseBranchText + "* to *" + compareBranchText + "*." + mentions
                 }
             },
             {
@@ -107,7 +114,7 @@ else {
                 type: "section",
                 text: {
                     type: "mrkdwn",
-                    text: sendHereMention + "*<" + prUrl + "|" + prTitle + ">*"
+                    text: mentions + "*<" + prUrl + "|" + prTitle + ">*"
                 },
                 accessory: {
                     type: "image",
